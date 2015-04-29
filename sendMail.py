@@ -53,8 +53,8 @@ def sendMail(content, subject = def_subject, filespath = def_filespath):
 
 def main():
     content = 'Hi, Young!'
-    subject = 'A piece of Music'
-    filespath = ['~/Media/raspberrypi_200x200.jpg']
+    subject = 'A textfile'
+    filespath = ['~/Media/hello.txt']
     if sendMail(content, subject, filespath):
         print("send mail successfully.")
     else:
