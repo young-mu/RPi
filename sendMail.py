@@ -3,9 +3,12 @@
 
 import os, re, smtplib
 from email.utils import COMMASPACE
+from email import encoders
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from mailInfo import sender, password, def_subject, tolist, cclist, def_filespath
+
 
 def sendMail(content, subject = def_subject, filespath = def_filespath):
     assert type(sender) == str
@@ -20,19 +23,16 @@ def sendMail(content, subject = def_subject, filespath = def_filespath):
         server_name = re.findall(r_server, sender)
         smtpserver = 'smtp.' + server_name[0] + '.com'
         smtpport = '25'
-        username = sender
         # support attachment
         msg = MIMEMultipart()
         if filespath is not None:
             for singlefile in filespath:
                 singlefile = singlefile.replace('~', os.environ['HOME'])
                 filename = os.path.basename(singlefile)
-                # convert bytes to str
-                ctnt_bytes = open(singlefile, 'rb').read()
-                ctnt_str = ctnt_bytes.decode('utf-8', 'strict')
-                att = MIMEText(ctnt_str, 'base64')
-                att['content-type'] = 'application/octet-stream'
-                att['content-disposition'] = 'attachment;filename="%s"' % filename
+                att = MIMEBase('application', 'octet-stream')
+                att.set_payload(open(singlefile, 'rb').read())
+                encoders.encode_base64(att)
+                att.add_header('Content-Disposition', 'attachment;filename="%s"' % filename)
                 msg.attach(att)
         # mail body
         body = MIMEText(content)
@@ -43,7 +43,7 @@ def sendMail(content, subject = def_subject, filespath = def_filespath):
         msg['subject'] = subject
         smtp = smtplib.SMTP()
         smtp.connect(smtpserver, smtpport)
-        smtp.login(username, password)
+        smtp.login(sender, password)
         smtp.sendmail(sender, tolist, msg.as_string())
         smtp.close()
         return True
@@ -53,8 +53,8 @@ def sendMail(content, subject = def_subject, filespath = def_filespath):
 
 def main():
     content = 'Hi, Young!'
-    subject = 'A textfile'
-    filespath = ['~/Media/hello.txt']
+    subject = 'A multimedia file'
+    filespath = ['~/Media/raspberrypi_200x200.jpg']
     if sendMail(content, subject, filespath):
         print("send mail successfully.")
     else:
