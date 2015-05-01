@@ -5,6 +5,7 @@ __Projects__
 
 * getTemp.py: get CPU & GPU temperature
 * sendMail.py: send email by SMTP protocol
+* getAQI.py: get shanghai Air Quality Index
 
 __Bugs__
 * no :)
@@ -12,5 +13,4 @@ __Bugs__
 __TODO list__
 
 * getWeather.py
-* getAirQuality.py
 
