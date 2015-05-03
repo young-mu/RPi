@@ -76,13 +76,13 @@ def getForecast(city):
 
 def main():
     weather = getWeather('shanghai')
-    print("weather: %s temperature: %.2f humidity: %d" % (weather['desc'], weather['temp'], weather['humidity']))
+    print("天气:%s 温度:%.2f 湿度:%d" % (weather['desc'], weather['temp'], weather['humidity']))
     forecasts = getForecast('shanghai')
     for i in range(len(forecasts)):
         desc = forecasts[i][0]
         mintemp = int(round(forecasts[i][1]))
         maxtemp = int(round(forecasts[i][2]))
-        print("(day" + str(i+1) + ") " + "weather: %-8s temperature:%d-%d" % (desc, mintemp, maxtemp))
+        print("(第" + str(i+1) + "天) " + "天气:%-8s 温度:%d-%d" % (desc, mintemp, maxtemp))
 
 if __name__ == "__main__":
     main()
