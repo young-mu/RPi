@@ -13,6 +13,7 @@ AQI_host = apiAQI + '?city=' + city + '&token=' + token
 def getAQI():
     urlfile = urllib.request.urlopen(AQI_host)
     html = urlfile.read()
+    html = html.decode('utf8', 'strict')
     AQIs = json.loads(html)
     stations_name = []
     stations_code = []
@@ -30,12 +31,12 @@ def getAQI():
 
 def main():
     AQIs = getAQI()
-    AQIlist = AQIs.items()
+    AQIlist = list(AQIs.items())
     assert type(AQIs) == dict
     assert type(AQIlist) == list
     for i in range(len(AQIlist)):
-        print("%s %3d(%s)  %s" % (AQIlist[i][0], AQIlist[i][1][1], AQIlist[i][1][2], AQIlist[i][1][0]))
-    print("Pudong: %d" % AQIs['1149A'][1])
+        print("%s %3d(%s) %s" % (AQIlist[i][0], AQIlist[i][1][1], AQIlist[i][1][2], AQIlist[i][1][0]))
+    print("浦东: %d" % AQIs['1149A'][1])
 
 if __name__ == "__main__":
     main()
