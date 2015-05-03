@@ -2,7 +2,7 @@
 # coding:utf8
 
 import json
-import urllib2
+import urllib.request
 
 # Ref: http://www.pm25.in/api_doc
 apiAQI = 'http://www.pm25.in/api/querys/only_aqi.json'
@@ -11,7 +11,7 @@ token = '5j1znBVAsnSf5xQyNQyq'
 AQI_host = apiAQI + '?city=' + city + '&token=' + token
 
 def getAQI():
-    urlfile = urllib2.urlopen(AQI_host)
+    urlfile = urllib.request.urlopen(AQI_host)
     html = urlfile.read()
     AQIs = json.loads(html)
     stations_name = []
