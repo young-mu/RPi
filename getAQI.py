@@ -35,7 +35,7 @@ def main():
     assert type(AQIlist) == list
     for i in range(len(AQIlist)):
         print("%s %3d(%s)  %s" % (AQIlist[i][0], AQIlist[i][1][1], AQIlist[i][1][2], AQIlist[i][1][0]))
-    print("浦东: %d" % AQIs['1149A'][1])
+    print("Pudong: %d" % AQIs['1149A'][1])
 
 if __name__ == "__main__":
     main()

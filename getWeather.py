@@ -2,7 +2,7 @@
 # coding:utf8
 
 import json
-import urllib2
+import urllib.request
 
 kelvin = 273.15
 apiWeather = "http://api.openweathermap.org/data/2.5/weather"
@@ -17,10 +17,11 @@ def getMostEle(mylist):
 def getWeatherInner(city):
     try:
         weather_host = apiWeather + "?q=" + city + "&appid=" + appid
-        urlfile = urllib2.urlopen(weather_host)
+        urlfile = urllib.request.urlopen(weather_host)
         html = urlfile.read()
+        html = html.decode('utf8', 'strict')
         weather_info = json.loads(html)
-        desc = (weather_info['weather'][0]['main']).encode('utf8')
+        desc = weather_info['weather'][0]['main']
         temp = round((weather_info['main']['temp'] - kelvin), 2)
         humidity = weather_info['main']['humidity']
         ret_dict = {'desc':desc, 'temp':temp, 'humidity':humidity}
@@ -37,14 +38,15 @@ def getWeather(city):
 def getForecastInner(city):
     try:
         forecast_host = apiForecast + "?q=" + city + "&appid=" + appid
-        urlfile = urllib2.urlopen(forecast_host)
+        urlfile = urllib.request.urlopen(forecast_host)
         html = urlfile.read()
+        html = html.decode('utf8', 'strict')
         forecast_info = json.loads(html)
         forecast_list = forecast_info['list']
         forecast_detail = []
         for i in range(len(forecast_list)):
-            time = forecast_list[i]['dt_txt'].encode('utf8')
-            desc = forecast_list[i]['weather'][0]['main'].encode('utf8')
+            time = forecast_list[i]['dt_txt']
+            desc = forecast_list[i]['weather'][0]['main']
             temp = round((forecast_list[i]['main']['temp'] - kelvin), 2)
             item = (time, desc, temp)
             forecast_detail.append(item)
@@ -74,13 +76,13 @@ def getForecast(city):
 
 def main():
     weather = getWeather('shanghai')
-    print("天气:%s 温度:%.2f 湿度:%d" % (weather['desc'], weather['temp'], weather['humidity']))
+    print("weather: %s temperature: %.2f humidity: %d" % (weather['desc'], weather['temp'], weather['humidity']))
     forecasts = getForecast('shanghai')
     for i in range(len(forecasts)):
         desc = forecasts[i][0]
         mintemp = int(round(forecasts[i][1]))
         maxtemp = int(round(forecasts[i][2]))
-        print("(第" + str(i+1) + "天) " + "天气:%-8s 温度:%d-%d" % (desc, mintemp, maxtemp))
+        print("(day" + str(i+1) + ") " + "weather: %-8s temperature:%d-%d" % (desc, mintemp, maxtemp))
 
 if __name__ == "__main__":
     main()
