@@ -3,13 +3,12 @@ all projects of RaspberryPi2
 
 __Projects__
 
-* getTemp.py: get CPU & GPU temperature
-* sendMail.py: send email by SMTP protocol
-* getAQI.py: get shanghai Air Quality Index
-* getWeather.py: get weather now and following 4 days' forecast
+* Tools/getTemp.py: get CPU & GPU temperature
+* Tools/sendMail.py: send email by SMTP protocol
+* Tools/getAQI.py: get shanghai Air Quality Index
+* Tools/getWeather.py: get weather now and following 4 days' forecast
 
 __Bugs__
 * no :)
 
 __TODO list__
-* GPIO

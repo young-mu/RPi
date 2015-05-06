@@ -1,0 +1,11 @@
+body {
+    padding-top: 50px;
+}
+
+.backup-log {
+    padding: 40px 20px;
+}
+
+.backup-log h1 {
+    text-align: center;
+}
