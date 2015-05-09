@@ -1,11 +1,9 @@
 #!/usr/bin/python
 
 import wiringpi2 as GPIO
-import time
 
 def initGPIO(pin):
     GPIO.wiringPiSetup()
-    GPIO.pullUpDnControl(pin, 2)
 
 def untilLow(pin):
     while True:
