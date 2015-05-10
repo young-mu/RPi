@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RaspberryPi</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/navi.css" rel="stylesheet">
+  <link href="css/home.css" rel="stylesheet">
   <link href="raw/raspberrypi.ico" rel="icon">
 </head>
 
@@ -25,7 +25,9 @@
       </div> <!-- .navbar-header -->
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#backup">Backup</a></li>
+          <li><a href="#sensors">Sensors</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul> <!-- .nav navbar-nav -->
@@ -34,7 +36,7 @@
   </nav>
 
   <div class="container">
-    <div class="backup-log">
+    <div class="backup-log" id="backup">
       <h1>RPi OS Backup Log</h1>
       <h3><u>v1.4</u></h3>
         <p><i>update logs</i>:</p>
@@ -109,11 +111,23 @@
           <li>tree</li>
         </ul>
     </div>
+
+    <div class="sensors-monitor" id="sensors">
+      <h1>Sensors Monitor</h1>
+      <ul>
+        <li>DHT11 humidity & temperature sensor</li>
+          <button id="dht11-hum">湿度（0%）</button>
+          <button id="dht11-temp">温度（0°C）</button>
+        <li>DS18B20 temperature sensor</li>
+          <button id="ds18b20">温度（0°C）</button>
+      <ul>
+    </div>
   </div>
 
   <!-- after document ready -->
   <script src="js/jquery-2.1.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/sensors.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,21 @@
+body {
+  padding-top: 50px;
+}
+
+.backup-log {
+  padding: 40px 10px;
+}
+
+.backup-log h1 {
+  text-align: center;
+}
+
+.sensors-monitor h1 {
+  text-align: center;
+}
+
+.sensors-monitor button {
+  width: 150px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
