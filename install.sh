@@ -3,9 +3,9 @@
 function retChk()
 {
     if [ $? = 0 ]; then
-        echo "[OK]"
+        echo -e "[\e[0;32m OK \e[0m]"
     else
-        echo "[FAIL]"
+        echo -e "[\e[0;31m FAIL \e[0m]"
     fi
 }
 

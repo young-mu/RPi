@@ -12,7 +12,7 @@ __Projects__
 * Web: (based on 3.3.4 bootstrap and 2.1.3 jQuery)
 
 __Bugs__
-* Sensors/dht11.py: sometimes hang at crc untilLow()
+* Sensors/dht11.py: sometimes hang at crc untilLow() or no sensor
 
 __TODO list__
 * complete install.sh
