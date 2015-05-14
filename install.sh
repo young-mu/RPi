@@ -11,12 +11,31 @@ function retChk()
     fi
 }
 
-function apply()
+function prUsage()
 {
-    echo "OK"
+cat << EOF
+Usage:
+1) $0 diffall
+2) $0 diff N
+3) $0 apply N
+EOF
 }
 
-function pDiff()
+function apply()
+{
+    case "$1" in
+        1) cp Web/index.html ${PREFIX}/index.html;;
+        2) cp Web/sensors.php ${PREFIX}/sensors.php;;
+        3) cp -r Web/css ${PREFIX}/css;;
+        4) cp -r Web/js ${PREFIX}/js;;
+        5) cp -r Web/fonts ${PREFIX}/fonts;;
+        6) cp -r Web/raw ${PREFIX}/raw;;
+        7) cp -r Sensors ${PREFIX}/Sensors;;
+        8) cp -r Tools ${PREFIX}/Tools;;
+    esac
+}
+
+function prDiff()
 {
     if [ $# -eq 0 ]; then
         echo -e -n "1. Web/index.html\t\t"
@@ -57,16 +76,16 @@ function pDiff()
     fi
 }
 
-if [[ $# -eq 1 ]] && [[ $1 = "diffall" ]]; then
-    pDiff
+if [[ $# -eq 0 ]]; then
+    prUsage
+elif [[ $# -eq 1 ]] && [[ $1 = "diffall" ]]; then
+    prDiff
 elif [[ $# -eq 2 ]] && [[ $1 = "diff" ]]; then
     if [[ $2 -ge 1 ]] && [[ $2 -le 8 ]]; then
-        pDiff $2
+        prDiff $2
     fi
 elif [[ $# -eq 2 ]] && [[ $1 = "apply" ]]; then
     if [[ $2 -ge 1 ]] && [[ $2 -le 8 ]]; then
         apply $2
     fi
 fi
-
-

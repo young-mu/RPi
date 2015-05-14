@@ -15,4 +15,3 @@ __Bugs__
 * Sensors/dht11.py: sometimes hang at crc untilLow() or no sensor
 
 __TODO list__
-* complete install.sh
