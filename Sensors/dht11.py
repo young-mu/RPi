@@ -1,9 +1,17 @@
 #!/usr/bin/python
 
+# Note:
+# Humidity should be monitored at an interval of 3 seconds at least
+# Temperature has no such limitation
+
 import wiringpi2 as GPIO
+import signal
 
 def initGPIO(pin):
     GPIO.wiringPiSetup()
+
+def timeoutHandler(signum, frame):
+    raise TimeoutError
 
 def untilLow(pin):
     while True:
@@ -52,9 +60,16 @@ def readData(pin):
 
 def getTempAndHum(pin):
     initGPIO(pin)
+    signal.signal(signal.SIGALRM, timeoutHandler)
     while True:
-        [isSuccess, humdata, tempdata, crcdata] = readData(pin)
-        if isSuccess == False:
+        try:
+            signal.alarm(2) # avoid hang or no sensor
+            [isSuccess, humdata, tempdata, crcdata] = readData(pin)
+            signal.alarm(0)
+        except TimeoutError:
+            print("Error: no sensor device or hang")
+            exit(1)
+        if isSuccess == False: # avoid no sensor response
             continue
         humInt = (humdata & 0xFF00) >> 8
         humDec = (humdata & 0xFF)
