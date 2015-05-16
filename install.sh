@@ -26,12 +26,12 @@ function apply()
     case "$1" in
         1) cp Web/index.html ${PREFIX}/index.html;;
         2) cp Web/sensors.php ${PREFIX}/sensors.php;;
-        3) cp -r Web/css ${PREFIX}/css;;
-        4) cp -r Web/js ${PREFIX}/js;;
-        5) cp -r Web/fonts ${PREFIX}/fonts;;
-        6) cp -r Web/raw ${PREFIX}/raw;;
-        7) cp -r Sensors ${PREFIX}/Sensors;;
-        8) cp -r Tools ${PREFIX}/Tools;;
+        3) rm -rf ${PREFIX}/css; cp -r Web/css ${PREFIX}/css;;
+        4) rm -rf ${PREFIX}/js; cp -r Web/js ${PREFIX}/js;;
+        5) rm -rf ${PREFIX}/fonts; cp -r Web/fonts ${PREFIX}/fonts;;
+        6) rm -rf ${PREFIX}/raw; cp -r Web/raw ${PREFIX}/raw;;
+        7) rm -rf ${PREFIX}/Sensors; cp -r Sensors ${PREFIX}/Sensors;;
+        8) rm -rf ${PREFIX}/Tools; cp -r Tools ${PREFIX}/Tools;;
     esac
 }
 
@@ -83,9 +83,15 @@ elif [[ $# -eq 1 ]] && [[ $1 = "diffall" ]]; then
 elif [[ $# -eq 2 ]] && [[ $1 = "diff" ]]; then
     if [[ $2 -ge 1 ]] && [[ $2 -le 8 ]]; then
         prDiff $2
+    else
+        prUsage
     fi
 elif [[ $# -eq 2 ]] && [[ $1 = "apply" ]]; then
     if [[ $2 -ge 1 ]] && [[ $2 -le 8 ]]; then
         apply $2
+    else
+        prUsage
     fi
+else
+    prUsage
 fi
