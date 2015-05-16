@@ -9,6 +9,7 @@ __Projects__
 * Tools/getWeather.py: get weather now and following 7 day forecasts
 * Sensors/dht11.py: get humidity & temperature
 * Sensors/ds18b20.py: get temperature (NOT test)
+* Sensors/sw420.py: get vibration trigger
 * Web: (based on 3.3.4 bootstrap and 2.1.3 jQuery)
 
 __Bugs__
