@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Note:
+# NOTE:
 # this is a python wrapper, the 3rd argument of wiringPiISR is an interrupt callback, if it's given a python function, it fails may be it's a bug for Python calling C
 
 import os
