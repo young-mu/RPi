@@ -5,18 +5,13 @@ import json
 import urllib.request
 import socket
 
-timeout = 5
+timeout = 1
 kelvin = 273.15
 apiWeather = "http://api.openweathermap.org/data/2.5/weather"
 apiForecast = "http://api.openweathermap.org/data/2.5/forecast/daily"
 appid = "c9a0753615c01095701a37f97ae76583"
 
-def getMostEle(mylist):
-    mylist_with_count = map(lambda x: (mylist.count(x), x), mylist)
-    mylist_most_count = max(mylist_with_count)
-    return mylist_most_count[1]
-
-def getWeather(city):
+def getWeatherInner(city):
     try:
         weather_host = apiWeather + "?q=" + city + "&appid=" + appid
         socket.setdefaulttimeout(timeout)
@@ -30,10 +25,18 @@ def getWeather(city):
         ret_dict = {'desc':desc, 'temp':temp, 'humidity':humidity}
         return ret_dict
     except Exception as err:
-        print(err)
         return False
 
-def getForecast(city):
+def getWeather(city):
+    for i in range(5):
+        weather = getWeatherInner(city)
+        if weather is False:
+            continue
+        else:
+            return weather
+     return False
+
+def getForecastInner(city):
     try:
         forecast_host = apiForecast + "?q=" + city + "&appid=" + appid
         socket.setdefaulttimeout(timeout)
@@ -51,13 +54,24 @@ def getForecast(city):
             forecasts.append(item)
         return forecasts
     except Exception as err:
-        print(err)
         return False
+
+def getForecast(city):
+    for i in range(5):
+        forecast = getForecastInner(city)
+        if forecast is False:
+            continue
+        else:
+            return forecast
+    return False
+
 
 def main():
     weather = getWeather('shanghai')
     if weather is not False:
         print("天气:%s 温度:%.2f 湿度:%d" % (weather['desc'], weather['temp'], weather['humidity']))
+    else:
+        print("Get weather failed! (timeout)")
     forecasts = getForecast('shanghai')
     if forecasts is not False:
         for i in range(len(forecasts)):
@@ -65,6 +79,8 @@ def main():
             mintemp = int(round(forecasts[i][1]))
             maxtemp = int(round(forecasts[i][2]))
             print("(第" + str(i+1) + "天) " + "天气:%-8s 温度:%d-%d" % (desc, mintemp, maxtemp))
+    else:
+        print("Get forecast failed! (timeout)")
 
 if __name__ == "__main__":
     main()
