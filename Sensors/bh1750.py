@@ -42,14 +42,12 @@ def getLightOne(dev, i2cBus):
 
 def main():
     i2cBus = initI2C()
-    while True:
-        light = getLightOne(DEVICE, i2cBus)
-        if light != -1:
-            print("光强: %d(lx)" % light)
-            time.sleep(0.5)
-        else:
-            print("Error: no sensor device")
-            exit(1)
+    light = getLightOne(DEVICE, i2cBus)
+    if light != -1:
+        print("光强（%dlx）" % light)
+    else:
+        print("Error: no sensor device")
+        exit(1)
 
 if __name__ == "__main__":
     main()

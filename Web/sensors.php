@@ -19,6 +19,14 @@ if (isset($_POST['sensor'])) {
             echo 0;
         }
         break;
+    case "bh1750":
+        exec("sudo ./Sensors/bh1750.py", $ret, $status);
+        if ($status == 0) {
+            echo "$ret[0]";
+        } else {
+            echo 0;
+        }
+        break;
     default:
         echo "default";
     }

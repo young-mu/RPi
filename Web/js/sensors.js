@@ -25,4 +25,17 @@ $(document).ready(function() {
                 }
             }});
     });
+    $("#bh1750").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "/sensors.php",
+            data: {sensor:"bh1750"},
+            success: function(temp) {
+                if (temp !=0) {
+                    $("#bh1750").text(temp);
+                } else {
+                    alert("get bh1750 failed!");
+                }
+            }});
+    });
 });
