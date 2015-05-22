@@ -34,7 +34,7 @@ def getWeather(city):
             continue
         else:
             return weather
-     return False
+    return False
 
 def getForecastInner(city):
     try:
