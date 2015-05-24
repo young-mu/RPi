@@ -6,6 +6,7 @@ import subprocess as sp
 def getTempOfCPU(type = 'C'):
     file = open("/sys/class/thermal/thermal_zone0/temp")
     cpu_temp = (float)(file.read()) / 1000
+    cpu_temp = round(cpu_temp, 1)
     file.close()
     if type == 'C':
         return cpu_temp
@@ -17,6 +18,7 @@ def getTempOfCPU(type = 'C'):
 def getTempOfGPU(type = 'C'):
     ret = sp.getoutput("/opt/vc/bin/vcgencmd measure_temp")
     gpu_temp = (float)(ret.replace('temp=', '').replace('\'C', ''))
+    gpu_temp = round(gpu_temp, 1)
     if type == 'C':
         return gpu_temp
     elif type == 'F':
@@ -25,8 +27,8 @@ def getTempOfGPU(type = 'C'):
         return 0
 
 def main():
-    print("CPU temp: " + str(getTempOfCPU('C')))
-    print("GPU temp: " + str(getTempOfGPU('C')))
+    print("CPU温度（" + str(getTempOfCPU('C')) + "°C）")
+    print("GPU温度（" + str(getTempOfGPU('C')) + "°C）")
 
 if __name__ == '__main__':
     main()

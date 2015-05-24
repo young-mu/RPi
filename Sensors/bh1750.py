@@ -4,6 +4,7 @@
 # NOTE:
 # 1. python3 has no smbus module
 # 2. wiringPiI2CRead() in wiringpi2 module fails to read the second byte
+# 3. sensor module's name is gy30
 
 import time
 import smbus
