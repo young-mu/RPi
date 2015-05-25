@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("#bcm2836-cputemp").click(function() {
         $.ajax({
             type: "POST",
-            url: "/sensors.php",
+            url: "/php/sensors.php",
             data: {sensor:"bcm2836-cputemp"},
             success: function(hum) {
                 if (hum != 0) {
@@ -15,7 +15,7 @@ $(document).ready(function() {
     $("#bcm2836-gputemp").click(function() {
         $.ajax({
             type: "POST",
-            url: "/sensors.php",
+            url: "/php/sensors.php",
             data: {sensor:"bcm2836-gputemp"},
             success: function(hum) {
                 if (hum != 0) {
@@ -28,7 +28,7 @@ $(document).ready(function() {
     $("#dht11-hum").click(function() {
         $.ajax({
             type: "POST",
-            url: "/sensors.php",
+            url: "/php/sensors.php",
             data: {sensor:"dht11-hum"},
             success: function(hum) {
                 if (hum != 0) {
@@ -41,7 +41,7 @@ $(document).ready(function() {
     $("#dht11-temp").click(function() {
         $.ajax({
             type: "POST",
-            url: "/sensors.php",
+            url: "/php/sensors.php",
             data: {sensor:"dht11-temp"},
             success: function(temp) {
                 if (temp !=0) {
@@ -54,7 +54,7 @@ $(document).ready(function() {
     $("#bh1750").click(function() {
         $.ajax({
             type: "POST",
-            url: "/sensors.php",
+            url: "/php/sensors.php",
             data: {sensor:"bh1750"},
             success: function(temp) {
                 if (temp !=0) {

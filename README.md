@@ -17,3 +17,6 @@ __Projects__
 __Bugs__
 
 __TODO list__
+* step motor driver (/sys/class/...)
+* control step modor in web page
+* improve install.sh (one source)

@@ -28,6 +28,7 @@
           <li><a href="#">Home</a></li>
           <li><a href="#backup">Backup</a></li>
           <li><a href="#sensors">Sensors</a></li>
+          <li><a href="#controllers">Controllers</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul> <!-- .nav navbar-nav -->
@@ -156,12 +157,24 @@
           <button id="bh1750">光强（0lx）</button>
       <ul>
     </div>
+
+    <div class="controllers" id="controllers">
+      <h1>Controllers</h1>
+      <ul>
+        <li>ULN2003 step motor</li>
+          <button id="uln2003-start">开始转动</button>
+          <button id="uln2003-stop">停止转动</button>
+          <button id="uln2003-speedup">加速</button>
+          <button id="uln2003-speeddown">减速</button>
+      <ul>
+    </div>
   </div>
 
   <!-- after document ready -->
   <script src="js/jquery-2.1.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/sensors.js"></script>
+  <script src="js/controllers.js"></script>
 </body>
 
 </html>

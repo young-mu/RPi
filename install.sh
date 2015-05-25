@@ -29,8 +29,8 @@ function apply()
         echo -e -n "1. Web/index/html\t\t"
         cp Web/index.html ${PREFIX}/index.html
         retChk
-        echo -e -n "2. Web/sensors.php\t\t"
-        cp Web/sensors.php ${PREFIX}/sensors.php
+        echo -e -n "2. Web/php\t\t\t"
+        rm -rf ${PREFIX}/php; cp -r Web/php ${PREFIX}/php
         retChk
         echo -e -n "3. Web/css\t\t\t"
         rm -rf ${PREFIX}/css; cp -r Web/css ${PREFIX}/css
@@ -56,7 +56,7 @@ function apply()
     elif [ $# -eq 1 ]; then
         case "$1" in
             1) cp Web/index.html ${PREFIX}/index.html;;
-            2) cp Web/sensors.php ${PREFIX}/sensors.php;;
+            2) rm -rf ${PREFIX}/php; cp -r Web/php ${PREFIX}/php;;
             3) rm -rf ${PREFIX}/css; cp -r Web/css ${PREFIX}/css;;
             4) rm -rf ${PREFIX}/js; cp -r Web/js ${PREFIX}/js;;
             5) rm -rf ${PREFIX}/fonts; cp -r Web/fonts ${PREFIX}/fonts;;
@@ -75,8 +75,8 @@ function prDiff()
         echo -e -n "1. Web/index.html\t\t"
         diff Web/index.html ${PREFIX}/index.html > /dev/null 2>&1
         retChk
-        echo -e -n "2. Web/sensors.php\t\t"
-        diff Web/sensors.php ${PREFIX}/sensors.php > /dev/null 2>&1
+        echo -e -n "2. Web/php\t\t\t"
+        diff -r Web/php ${PREFIX}/php > /dev/null 2>&1
         retChk
         echo -e -n "3. Web/css\t\t\t"
         diff -r Web/css ${PREFIX}/css > /dev/null 2>&1
@@ -102,7 +102,7 @@ function prDiff()
     elif [ $# -eq 1 ]; then
         case "$1" in
             1) colordiff Web/index.html ${PREFIX}/index.html;;
-            2) colordiff Web/sensors.php ${PREFIX}/sensors.php;;
+            2) colordiff -r Web/php ${PREFIX}/php;;
             3) colordiff -r Web/css ${PREFIX}/css;;
             4) colordiff -r Web/js ${PREFIX}/js;;
             5) colordiff -r Web/fonts ${PREFIX}/fonts;;

@@ -3,6 +3,7 @@
 # NOTE:
 # step motor's name is 28byj48, uln2003 is driver module's name
 
+import sys
 import wiringpi2 as GPIO
 
 nGPIOs = [0, 1, 2, 3]
@@ -20,6 +21,11 @@ CCW_seq[0] = [0, 0, 0, 1]
 CCW_seq[1] = [0, 0, 1, 0]
 CCW_seq[2] = [0, 1, 0, 0]
 CCW_seq[3] = [1, 0, 0, 0]
+
+def prUsage():
+    print("Usage:")
+    print("./uln2003.py [CW|CWW] delay(2-20)");
+    sys.exit(1)
 
 def initGPIO(nGPIOs):
     GPIO.wiringPiSetup()
@@ -47,8 +53,18 @@ def stop(nGPIOs):
 
 def main():
     initGPIO(nGPIOs)
-    # delay range: 2-20
-    start(nGPIOs, CW, 10)
+    if len(sys.argv) != 3:
+        prUsage()
+    else:
+        delay = int(sys.argv[2])
+        if delay < 2 or delay > 20:
+            prUsage()
+        if sys.argv[1] == "CW":
+            start(nGPIOs, CW, delay);
+        elif sys.argv[1] == "CCW":
+            start(nGPIOs, CCW, delay);
+        else:
+            prUsage()
 
 if __name__ == "__main__":
     main()
