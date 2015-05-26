@@ -15,8 +15,8 @@ __Projects__
 * Web: (based on 3.3.4 bootstrap and 2.1.3 jQuery)
 
 __Bugs__
+* fail to resolve http address sometimes
 
 __TODO list__
-* step motor driver (/sys/class/...)
 * control step modor in web page
 * improve install.sh (one source)

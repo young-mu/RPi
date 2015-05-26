@@ -54,7 +54,7 @@ function apply()
         rm -rf ${PREFIX}/Controllers; cp -r Controllers ${PREFIX}/Controllers
         retChk
     elif [ $# -eq 1 ]; then
-        case "$1" in
+        case $1 in
             1) cp Web/index.html ${PREFIX}/index.html;;
             2) rm -rf ${PREFIX}/php; cp -r Web/php ${PREFIX}/php;;
             3) rm -rf ${PREFIX}/css; cp -r Web/css ${PREFIX}/css;;
@@ -100,7 +100,7 @@ function prDiff()
         diff -r Controllers ${PREFIX}/Controllers > /dev/null 2>&1
         retChk
     elif [ $# -eq 1 ]; then
-        case "$1" in
+        case $1 in
             1) colordiff Web/index.html ${PREFIX}/index.html;;
             2) colordiff -r Web/php ${PREFIX}/php;;
             3) colordiff -r Web/css ${PREFIX}/css;;
@@ -109,7 +109,7 @@ function prDiff()
             6) colordiff -r Web/raw ${PREFIX}/raw;;
             7) colordiff -r Sensors ${PREFIX}/Sensors;;
             8) colordiff -r Tools ${PREFIX}/Tools;;
-            8) colordiff -r Controllers ${PREFIX}/Controllers;;
+            9) colordiff -r Controllers ${PREFIX}/Controllers;;
         esac
     fi
 }
@@ -121,13 +121,13 @@ elif [[ $# -eq 1 ]] && [[ $1 = "diffall" ]]; then
 elif [[ $# -eq 1 ]] && [[ $1 = "applyall" ]]; then
     apply
 elif [[ $# -eq 2 ]] && [[ $1 = "diff" ]]; then
-    if [[ $2 -ge 1 ]] && [[ $2 -le 8 ]]; then
+    if [[ $2 -ge 1 ]] && [[ $2 -le 9 ]]; then
         prDiff $2
     else
         prUsage
     fi
 elif [[ $# -eq 2 ]] && [[ $1 = "apply" ]]; then
-    if [[ $2 -ge 1 ]] && [[ $2 -le 8 ]]; then
+    if [[ $2 -ge 1 ]] && [[ $2 -le 9 ]]; then
         apply $2
     else
         prUsage

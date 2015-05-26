@@ -24,7 +24,8 @@ CCW_seq[3] = [1, 0, 0, 0]
 
 def prUsage():
     print("Usage:")
-    print("./uln2003.py [CW|CWW] delay(2-20)");
+    print("1) ./uln2003.py start direction=[0|1] delay=[2-20]");
+    print("2) ./uln2003.py stop");
     sys.exit(1)
 
 def initGPIO(nGPIOs):
@@ -41,10 +42,8 @@ def rotate(nGPIOs, seq, delay):
 
 def start(nGPIOs, direction, delay):
     if direction == CW:
-        print("Clockwise")
         rotate(nGPIOs, CW_seq, delay)
     elif direction == CCW:
-        print("CounterClockwise")
         rotate(nGPIOs, CCW_seq, delay)
 
 def stop(nGPIOs):
@@ -53,18 +52,20 @@ def stop(nGPIOs):
 
 def main():
     initGPIO(nGPIOs)
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 2 and len(sys.argv) != 4:
         prUsage()
-    else:
-        delay = int(sys.argv[2])
+    elif len(sys.argv) == 2 and sys.argv[1] == "stop":
+        stop(nGPIOs)
+    elif len(sys.argv) == 4 and sys.argv[1] == "start":
+        direction = int(sys.argv[2])
+        if direction != 0 and direction != 1:
+            prUsage()
+        delay = int(sys.argv[3])
         if delay < 2 or delay > 20:
             prUsage()
-        if sys.argv[1] == "CW":
-            start(nGPIOs, CW, delay);
-        elif sys.argv[1] == "CCW":
-            start(nGPIOs, CCW, delay);
-        else:
-            prUsage()
+        start(nGPIOs, direction, delay);
+    else:
+        prUsage()
 
 if __name__ == "__main__":
     main()
