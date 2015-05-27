@@ -15,14 +15,15 @@
     } while (0)
 
 int delay[5] = {20, 15, 10, 5, 2};
+const char *file_dir = "./dir.conf";
+const char *file_spd = "./spd.conf";
 
 int main(int argc, const char *argv[])
 {
-    const char *file_dir = "./dir.conf";
-    const char *file_spd = "./spd.conf";
-
     int fd_dir, fd_spd;
+    char *mem_dir, *mem_spd;
     int dir, spd;
+
     int page_sz = getpagesize();
 
     fd_dir = open(file_dir, O_RDONLY);
@@ -35,8 +36,8 @@ int main(int argc, const char *argv[])
         handle_error("open %s", file_spd);
     }
 
-    char *mem_dir = mmap(NULL, page_sz, PROT_READ, MAP_PRIVATE, fd_dir, 0);
-    char *mem_spd = mmap(NULL, page_sz, PROT_READ, MAP_PRIVATE, fd_spd, 0);
+    mem_dir = mmap(NULL, page_sz, PROT_READ, MAP_PRIVATE, fd_dir, 0);
+    mem_spd = mmap(NULL, page_sz, PROT_READ, MAP_PRIVATE, fd_spd, 0);
 
     while (1) {
         sleep(2);
