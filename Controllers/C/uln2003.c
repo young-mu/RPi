@@ -64,6 +64,11 @@ int main(int argc, const char *argv[])
         msync(mem_ebl, sizeof(int), MS_ASYNC);
     }
 
+    ebl = atoi(mem_ebl);
+    dir = atoi(mem_dir);
+    spd = atoi(mem_spd);
+    printf("{\"enable\":%d, \"direction\":%d, \"speed\":%d}\n", ebl, dir, spd);
+
 //    wiringPisetup();
 //    for (i = 0; i < 4; i++) {
 //        pinMode(nGPIOs[i], OUTPUT);

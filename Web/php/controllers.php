@@ -1,22 +1,27 @@
 <?php
 
-if (isset($_POST['controller'])) {
-    switch ($_POST['controller'])
+if (isset($_POST['control'])) {
+    switch ($_POST['control'])
     {
     case "uln2003-start":
-        exec("sudo ./Controllers/uln2003.py start", $ret, $status);
-        echo $status;
+        exec("sudo ./Controllers/C/uln2003 &", $ret, $status);
+        if ($status == 0) {
+            echo "$ret[0]";
+        } else {
+            echo 1;
+        }
         break;
     case "uln2003-stop":
-        exec("sudo ./Controllers/uln2003.py start", $ret, $status);
+        exec("echo 0 > ./Controllers/C/uln2003_attr/enable", $ret, $status);
         echo $status;
         break;
-    case "uln2003-speedup":
-        exec("sudo ./Controllers/uln2003.py start", $ret, $status);
+    case "uln2003-turn":
+        $direction = $_POST['direction'];
+        exec("echo " . $direction . " > ./Controllers/C/uln2003_attr/direction", $ret, $status);
         echo $status;
-        break;
-    case "uln2003-speeddown":
-        exec("sudo ./Controllers/uln2003.py start", $ret, $status);
+    case "uln2003-speed":
+        $speed = $_POST['speed'];
+        exec("echo " . $speed . " > ./Controllers/C/uln2003_attr/speed", $ret, $status);
         echo $status;
         break;
     default:
