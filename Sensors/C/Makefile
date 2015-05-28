@@ -14,8 +14,10 @@ all:
 	@echo "module: $(BIN)"
 
 sw420: sw420.o
-	@echo [Link]
-	@$(CC) -o $@ sw420.o $(LDFLAGS) $(LDLIBS)
+	@echo [Link] $@
+	@$(CC) -o $@ $< $(LDFLAGS) $(LDLIBS)
+	@echo [Clean] $<
+	@rm -f $<
 
 .c.o:
 	@echo [Compile] $<

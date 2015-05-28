@@ -14,8 +14,10 @@ all:
 	@echo "module: $(BIN)"
 
 uln2003: uln2003.o
-	@echo [Link]
-	@$(CC) -o $@ uln2003.o $(LDFLAGS) $(LDLIBS)
+	@echo [Link] $@
+	@$(CC) -o $@ $< $(LDFLAGS) $(LDLIBS)
+	@echo [Clean] $<
+	@rm -f $<
 
 .c.o:
 	@echo [Compile] $<

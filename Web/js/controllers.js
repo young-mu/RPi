@@ -6,10 +6,10 @@ $(document).ready(function() {
     $("#uln2003-start").click(function() {
         $.ajax({
             type: "POST",
-            url: "/controllers.php",
+            url: "/php/controllers.php",
             data: {control:"uln2003-start"},
             success: function(ret) {
-                if (ret == 0) {
+                if (ret != 1) {
                     var data = jQuery.parseJSON(ret);
                     uln2003_ebl = data['enable'];
                     uln2003_dir = data['direction'];
@@ -25,21 +25,22 @@ $(document).ready(function() {
     $("#uln2003-stop").click(function() {
         $.ajax({
             type: "POST",
-            url: "/controllers.php",
+            url: "/php/controllers.php",
             data: {control:"uln2003-stop"},
             success: function(ret) {
-                if (ret == 0) {
-                    uln2003_ebl = 0;
-                    $("#uln2003-status").text("OFF");
-                } else {
-                    alert("set uln2003-stop failed!");
-                }
+                alert(ret);
+//                if (ret == 0) {
+//                    uln2003_ebl = 0;
+//                    $("#uln2003-status").text("OFF");
+//                } else {
+//                    alert("set uln2003-stop failed!");
+//                }
             }});
     });
     $("#uln2003-turn").click(function() {
         $.ajax({
             type: "POST",
-            url: "/controllers.php",
+            url: "/php/controllers.php",
             data: {control:"uln2003-turn", direction:(uln2003_dir ? 0 : 1)},
             success: function(ret) {
                 if (ret == 0) {
@@ -54,7 +55,7 @@ $(document).ready(function() {
         if (uln2003_spd < 5) {
             $.ajax({
                 type: "POST",
-                url: "/controllers.php",
+                url: "/php/controllers.php",
                 data: {control:"uln2003-speed", speed:(uln2003_spd + 1)},
                 success: function(ret) {
                     if (ret == 0) {
@@ -72,7 +73,7 @@ $(document).ready(function() {
         if (uln2003_spd > 0) {
             $.ajax({
                 type: "POST",
-                url: "/controllers.php",
+                url: "/php/controllers.php",
                 data: {control:"uln2003-speed", speed:(uln2003_spd - 1)},
                 success: function(ret) {
                     if (ret == 0) {

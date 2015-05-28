@@ -4,7 +4,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
-//#include <wiringPi.h>
+#include <wiringPi.h>
 
 #define handle_error(fmt, args...)  \
     do {                            \
@@ -16,9 +16,9 @@
 
 int nGPIOs[4] = {0, 1, 2, 3};
 
-const char *file_ebl = "./uln2003_attr/enable";
-const char *file_dir = "./uln2003_attr/direction";
-const char *file_spd = "./uln2003_attr/speed";
+const char *file_ebl = "/srv/http/Controllers/C/uln2003_attr/enable";
+const char *file_dir = "/srv/http/Controllers/C/uln2003_attr/direction";
+const char *file_spd = "/srv/http/Controllers/C/uln2003_attr/speed";
 
 int dlyMS[5] = {20, 15, 10, 5, 2};
 
@@ -64,32 +64,31 @@ int main(int argc, const char *argv[])
         msync(mem_ebl, sizeof(int), MS_ASYNC);
     }
 
+    wiringPiSetup();
+    for (i = 0; i < 4; i++) {
+        pinMode(nGPIOs[i], OUTPUT);
+    }
+
     ebl = atoi(mem_ebl);
     dir = atoi(mem_dir);
     spd = atoi(mem_spd);
     printf("{\"enable\":%d, \"direction\":%d, \"speed\":%d}\n", ebl, dir, spd);
 
-//    wiringPisetup();
-//    for (i = 0; i < 4; i++) {
-//        pinMode(nGPIOs[i], OUTPUT);
-//    }
-
     while (1) {
-        sleep(1);
         ebl = atoi(mem_ebl);
         if (ebl == 1) {
             dir = atoi(mem_dir);
             spd = atoi(mem_spd);
-//            for (i = 0; i < 4; i++) {
-//                for (j = 0; j < 4; j++) {
-//                    digitalWrite(nGPIOs[i], seq[dir][i][j]);
-//                }
-//                delay(dlyMS[spd - 1];
-//            }
+            for (i = 0; i < 4; i++) {
+                for (j = 0; j < 4; j++) {
+                    digitalWrite(nGPIOs[j], seq[dir][i][j]);
+                }
+                delay(dlyMS[spd - 1]);
+            }
         } else if (ebl == 0) {
-//            for (i = 0; i < 4; i++) {
-//                digitalWrite(nGPIOs[i], 0);
-//            }
+            for (i = 0; i < 4; i++) {
+                digitalWrite(nGPIOs[i], 0);
+            }
             exit(0);
         }
     }
