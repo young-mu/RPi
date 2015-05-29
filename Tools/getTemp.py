@@ -27,8 +27,8 @@ def getTempOfGPU(type = 'C'):
         return 0
 
 def main():
-    print("CPU温度（" + str(getTempOfCPU('C')) + "°C）")
-    print("GPU温度（" + str(getTempOfGPU('C')) + "°C）")
+    print("CPU（" + str(getTempOfCPU('C')) + "°C）")
+    print("GPU（" + str(getTempOfGPU('C')) + "°C）")
 
 if __name__ == '__main__':
     main()

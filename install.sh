@@ -51,7 +51,7 @@ function apply()
         rm -rf ${PREFIX}/Tools; cp -r Tools ${PREFIX}/Tools
         retChk
         echo -e -n "9. Controllers\t\t\t"
-        rm -rf ${PREFIX}/Controllers; cp -r Controllers ${PREFIX}/Controllers
+        rm -rf ${PREFIX}/Controllers; cp -a Controllers ${PREFIX}/Controllers
         retChk
     elif [ $# -eq 1 ]; then
         case $1 in
@@ -63,7 +63,7 @@ function apply()
             6) rm -rf ${PREFIX}/raw; cp -r Web/raw ${PREFIX}/raw;;
             7) rm -rf ${PREFIX}/Sensors; cp -r Sensors ${PREFIX}/Sensors;;
             8) rm -rf ${PREFIX}/Tools; cp -r Tools ${PREFIX}/Tools;;
-            9) rm -rf ${PREFIX}/Controllers; cp -r Controllers ${PREFIX}/Controllers;;
+            9) rm -rf ${PREFIX}/Controllers; cp -a Controllers ${PREFIX}/Controllers;
         esac
     fi
 }

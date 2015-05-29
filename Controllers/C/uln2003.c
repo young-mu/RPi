@@ -40,6 +40,7 @@ int main(int argc, const char *argv[])
     char *mem_ebl, *mem_dir, *mem_spd;
     int ebl, dir, spd;
     int i, j;
+    pid_t child;
 
     int page_sz = getpagesize();
 
@@ -71,34 +72,42 @@ int main(int argc, const char *argv[])
         pinMode(nGPIOs[i], OUTPUT);
     }
 
-    ebl = atoi(mem_ebl);
-    dir = atoi(mem_dir);
-    spd = atoi(mem_spd);
-    printf("{\"enable\":%d, \"direction\":%d, \"speed\":%d}\n", ebl, dir, spd);
-
-    while (1) {
-        ebl = atoi(mem_ebl);
-        if (ebl == 1) {
-            dir = atoi(mem_dir);
-            spd = atoi(mem_spd);
-            for (i = 0; i < 4; i++) {
-                for (j = 0; j < 4; j++) {
-                    digitalWrite(nGPIOs[j], seq[dir][i][j]);
+    child = fork();
+    if (0 == child) {
+        while (1) {
+            ebl = atoi(mem_ebl);
+            if (ebl == 1) {
+                dir = atoi(mem_dir);
+                spd = atoi(mem_spd);
+                for (i = 0; i < 4; i++) {
+                    for (j = 0; j < 4; j++) {
+                        digitalWrite(nGPIOs[j], seq[dir][i][j]);
+                    }
+                    delay(dlyMS[spd - 1]);
                 }
-                delay(dlyMS[spd - 1]);
+            } else if (ebl == 0) {
+                for (i = 0; i < 4; i++) {
+                    digitalWrite(nGPIOs[i], 0);
+                }
+                munmap(mem_ebl, page_sz);
+                munmap(mem_dir, page_sz);
+                munmap(mem_spd, page_sz);
+                close(fd_ebl);
+                close(fd_dir);
+                close(fd_spd);
+                exit(0);
             }
-        } else if (ebl == 0) {
-            for (i = 0; i < 4; i++) {
-                digitalWrite(nGPIOs[i], 0);
-            }
-            exit(0);
         }
+    } else {
+        ebl = atoi(mem_ebl);
+        dir = atoi(mem_dir);
+        spd = atoi(mem_spd);
+        printf("{\"enable\":%d, \"direction\":%d, \"speed\":%d}\n", ebl, dir, spd);
     }
 
     munmap(mem_ebl, page_sz);
     munmap(mem_dir, page_sz);
     munmap(mem_spd, page_sz);
-
     close(fd_ebl);
     close(fd_dir);
     close(fd_spd);
