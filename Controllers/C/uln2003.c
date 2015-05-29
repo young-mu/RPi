@@ -14,11 +14,13 @@
         exit(EXIT_FAILURE);         \
     } while (0)
 
+#define DIR_PREFIX  "/srv/http/Controllers/C/uln2003_attr/"
+
 int nGPIOs[4] = {0, 1, 2, 3};
 
-const char *file_ebl = "/srv/http/Controllers/C/uln2003_attr/enable";
-const char *file_dir = "/srv/http/Controllers/C/uln2003_attr/direction";
-const char *file_spd = "/srv/http/Controllers/C/uln2003_attr/speed";
+const char *file_ebl = DIR_PREFIX"enable";
+const char *file_dir = DIR_PREFIX"direction";
+const char *file_spd = DIR_PREFIX"speed";
 
 int dlyMS[5] = {20, 15, 10, 5, 2};
 

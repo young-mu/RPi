@@ -1,3 +1,4 @@
+var uln2003_php_exec = "/php/controllers.php";
 var uln2003_ebl;
 var uln2003_dir;
 var uln2003_spd;
@@ -6,7 +7,7 @@ $(document).ready(function() {
     $("#uln2003-start").click(function() {
         $.ajax({
             type: "POST",
-            url: "/php/controllers.php",
+            url: uln2003_php_exec,
             data: {control:"uln2003-start"},
             success: function(ret) {
                 if (ret != 1) {
@@ -25,7 +26,7 @@ $(document).ready(function() {
     $("#uln2003-stop").click(function() {
         $.ajax({
             type: "POST",
-            url: "/php/controllers.php",
+            url: uln2003_php_exec,
             data: {control:"uln2003-stop"},
             success: function(ret) {
                 alert(ret);
@@ -40,7 +41,7 @@ $(document).ready(function() {
     $("#uln2003-turn").click(function() {
         $.ajax({
             type: "POST",
-            url: "/php/controllers.php",
+            url: uln2003_php_exec,
             data: {control:"uln2003-turn", direction:(uln2003_dir ? 0 : 1)},
             success: function(ret) {
                 if (ret == 0) {
@@ -55,7 +56,7 @@ $(document).ready(function() {
         if (uln2003_spd < 5) {
             $.ajax({
                 type: "POST",
-                url: "/php/controllers.php",
+                url: uln2003_php_exec,
                 data: {control:"uln2003-speed", speed:(uln2003_spd + 1)},
                 success: function(ret) {
                     if (ret == 0) {
@@ -73,7 +74,7 @@ $(document).ready(function() {
         if (uln2003_spd > 0) {
             $.ajax({
                 type: "POST",
-                url: "/php/controllers.php",
+                url: uln2003_php_exec,
                 data: {control:"uln2003-speed", speed:(uln2003_spd - 1)},
                 success: function(ret) {
                     if (ret == 0) {
