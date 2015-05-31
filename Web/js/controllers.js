@@ -1,16 +1,51 @@
-var uln2003_php_exec = "/php/controllers.php";
+var php_exec = "/php/controllers.php";
+var led_ebl = 0;
 var uln2003_ebl = 0;
 var uln2003_dir = 0;
 var uln2003_spd = 1;
 
 $(document).ready(function() {
+    $("#led-open").click(function() {
+        if (led_ebl == 1) {
+            console.log("already opened!");
+        } else {
+            $.ajax({
+                type: "POST",
+                url: php_exec,
+                async: false,
+                data: {control:"led-start"},
+                success: function(ret) {
+                    if (ret != 1) {
+                        var data = jQeury.parseJSON(ret);
+                        led_ebl = data['enable'];
+                        $("#led-status").text(led_ebl ? "ON" : "OFF");
+                    } else {
+                        alert("set led-open failed!");
+                    }
+                }});
+        }
+    });
+    $("#led-close").click(function() {
+        $.ajax({
+            type: "POST",
+            url: php_exec,
+            data: {control:"led-close"},
+            success: function(ret) {
+                if (ret == 0) {
+                    led_ebl = 0;
+                    $("#led-status").text("OFF");
+                } else {
+                    alert("set led-stop failed!");
+                }
+            }});
+    });
     $("#uln2003-start").click(function() {
         if (uln2003_ebl == 1) {
             console.log("already started!");
         } else {
             $.ajax({
                 type: "POST",
-                url: uln2003_php_exec,
+                url: php_exec,
                 async: false,
                 data: {control:"uln2003-start"},
                 success: function(ret) {
@@ -31,7 +66,7 @@ $(document).ready(function() {
     $("#uln2003-stop").click(function() {
         $.ajax({
             type: "POST",
-            url: uln2003_php_exec,
+            url: php_exec,
             data: {control:"uln2003-stop"},
             success: function(ret) {
                 if (ret == 0) {
@@ -45,7 +80,7 @@ $(document).ready(function() {
     $("#uln2003-turn").click(function() {
         $.ajax({
             type: "POST",
-            url: uln2003_php_exec,
+            url: php_exec,
             data: {control:"uln2003-turn", direction:(uln2003_dir ? 0 : 1)},
             success: function(ret) {
                 if (ret == 0) {
@@ -60,7 +95,7 @@ $(document).ready(function() {
         if (uln2003_spd < 5) {
             $.ajax({
                 type: "POST",
-                url: uln2003_php_exec,
+                url: php_exec,
                 data: {control:"uln2003-speed", speed:(uln2003_spd + 1)},
                 success: function(ret) {
                     if (ret == 0) {
@@ -78,7 +113,7 @@ $(document).ready(function() {
         if (uln2003_spd > 1) {
             $.ajax({
                 type: "POST",
-                url: uln2003_php_exec,
+                url: php_exec,
                 data: {control:"uln2003-speed", speed:(uln2003_spd - 1)},
                 success: function(ret) {
                     if (ret == 0) {
