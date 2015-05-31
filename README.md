@@ -11,12 +11,13 @@ __Projects__
 * Sensors/ds18b20.py: get temperature (NOT test)
 * Sensors/sw420.py: get vibration trigger
 * Sensors/bh1750.py: get light intensivity
+* Controllers/C/led: control led
 * Controllers/C/uln2003: control step motor
 * Web: (based on 3.3.4 bootstrap and 2.1.3 jQuery)
 
 __Bugs__
-* fail to resolve http address sometimes
 
 __TODO list__
 * improve install.sh (one source)
+* rewrite Controllers (led/uln2003) driver (abandon wiringPi user lib)
 * support homepage menu auto close in iPhone
