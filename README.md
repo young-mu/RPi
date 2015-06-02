@@ -16,6 +16,7 @@ __Projects__
 * Web: (based on 3.3.4 bootstrap and 2.1.3 jQuery)
 
 __Bugs__
+* when changing uln2003 speed, sometimes it will crash (it may be module internal bug)
 
 __TODO list__
 * improve install.sh (one source)
