@@ -13,10 +13,10 @@ $(document).ready(function() {
                 type: "POST",
                 url: php_exec,
                 async: false,
-                data: {control:"led-start"},
+                data: {control:"led-open"},
                 success: function(ret) {
                     if (ret != 1) {
-                        var data = jQeury.parseJSON(ret);
+                        var data = jQuery.parseJSON(ret);
                         led_ebl = data['enable'];
                         $("#led-status").text(led_ebl ? "ON" : "OFF");
                     } else {

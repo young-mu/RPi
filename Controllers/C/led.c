@@ -25,7 +25,6 @@ int main(int argc, const char *argv[])
     int fd_ebl;
     char *mem_ebl;
     int ebl;
-    int i;
     pid_t child;
 
     int page_sz = getpagesize();
@@ -52,6 +51,7 @@ int main(int argc, const char *argv[])
             ebl = atoi(mem_ebl);
             if (ebl == 1) {
                 digitalWrite(nGPIO, HIGH);
+                delay(50);
             } else if (ebl == 0) {
                 digitalWrite(nGPIO, LOW);
                 munmap(mem_ebl, page_sz);
@@ -61,7 +61,7 @@ int main(int argc, const char *argv[])
         }
     } else {
         ebl = atoi(mem_ebl);
-        printf("{\"enable\":%d\n", ebl);
+        printf("{\"enable\":%d}\n", ebl);
     }
 
     munmap(mem_ebl, page_sz);
