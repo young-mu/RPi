@@ -13,6 +13,8 @@ __Projects__
 * Sensors/bh1750.py: get light intensivity
 * Controllers/C/led: control led
 * Controllers/C/uln2003: control step motor
+* (experimental)Camera/opencv/capture.c: take a photo using opencv (support USB camera only for now)
+* (experimental)Camera/v4l2/capture.c: take a photo using v4l2
 * Web: (based on 3.3.4 bootstrap and 2.1.3 jQuery)
 
 __Bugs__
@@ -22,3 +24,4 @@ __TODO list__
 * improve install.sh (one source)
 * rewrite Controllers (led/uln2003) driver (abandon wiringPi user lib)
 * support homepage menu auto close in iPhone
+* support CSI raspberrypi camera on opencv
