@@ -4,19 +4,17 @@ if (isset($_POST['camera'])) {
     switch ($_POST['camera'])
     {
     case "status":
-        exec("vcgencmd get_camera", $ret, $status);
-        //exec("vcgencmd get_camera | awk -F'=' '{print $3}'", $ret, $status);
-        echo $ret;
+        exec("/opt/vc/bin/vcgencmd get_camera | awk -F'=' '{print $3}'", $ret, $status);
+        echo "$ret[0]";
         break;
     case "capture":
-        exec("echo 0 > ".$attr_dir_prefix."led_attr/enable", $ret, $status);
+        $opt_resolution = $_POST['resolution'];
+        $opt_quality = $_POST['quality'];
+        $opt_encode = $_POST['encode'];
+        $opt_flip = $_POST['flip'];
+        $opt_delay = $_POST['delay'];
+        exec("sudo /srv/http/Camera/vc/capture.sh $opt_resolution $opt_quality $opt_encode $opt_flip $opt_delay", $ret, $status);
         echo $status;
-        break;
-    case "uln2003-start":
-        $process = popen("sudo ".$attr_dir_prefix."uln2003", "r");
-        $ret = fgets($process, 100);
-        echo $ret;
-        pclose($process);
         break;
     default:
         echo "default";

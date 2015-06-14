@@ -55,6 +55,9 @@ function apply()
         echo -e -n "9. Controllers\t\t\t"
         rm -rf ${PREFIX}/Controllers; cp -a Controllers ${PREFIX}/Controllers
         retChk
+        echo -e -n "10. Camera\t\t\t"
+        rm -rf ${PREFIX}/Camera; cp -a Camera ${PREFIX}/Camera
+        retChk
     elif [ $# -eq 1 ]; then
         case $1 in
             1) cp Web/index.html ${PREFIX}/index.html;;
@@ -65,7 +68,8 @@ function apply()
             6) rm -rf ${PREFIX}/raw; cp -r Web/raw ${PREFIX}/raw;;
             7) rm -rf ${PREFIX}/Sensors; cp -r Sensors ${PREFIX}/Sensors;;
             8) rm -rf ${PREFIX}/Tools; cp -r Tools ${PREFIX}/Tools;;
-            9) rm -rf ${PREFIX}/Controllers; cp -a Controllers ${PREFIX}/Controllers;
+            9) rm -rf ${PREFIX}/Controllers; cp -a Controllers ${PREFIX}/Controllers;;
+            10) rm -rf ${PREFIX}/Camera; cp -a Camera ${PREFIX}/Camera;;
         esac
     fi
 }
@@ -101,6 +105,9 @@ function prDiff()
         echo -e -n "9. Controllers\t\t\t"
         diff -r Controllers ${PREFIX}/Controllers > /dev/null 2>&1
         retChk
+        echo -e -n "10. Camera\t\t\t"
+        diff -r Camera ${PREFIX}/Camera > /dev/null 2>&1
+        retChk
     elif [ $# -eq 1 ]; then
         case $1 in
             1) colordiff Web/index.html ${PREFIX}/index.html;;
@@ -112,6 +119,7 @@ function prDiff()
             7) colordiff -r Sensors ${PREFIX}/Sensors;;
             8) colordiff -r Tools ${PREFIX}/Tools;;
             9) colordiff -r Controllers ${PREFIX}/Controllers;;
+            10) colordiff -r Camera ${PREFIX}/Camera;;
         esac
     fi
 }

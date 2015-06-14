@@ -1,9 +1,9 @@
-var count = 0;
+var count = -1;
 
 unitCount();
 
 function unitCount() {
-    postMessage(count);
     count++;
+    postMessage(count);
     setTimeout(unitCount, 1000);
 }

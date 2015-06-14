@@ -14,18 +14,17 @@ function refreshStatus() {
         async: false,
         data: {camera:"status"},
         success: function(ret) {
-            alert(ret);
-//            if (ret == 1) {
-//                $("#camera-status").text("YES");
-//                $("#camera-capture").attr("disabled", false);
-//            } else {
-//                console.log("camera not available");
-//            }
+            if (ret == 1) {
+                $("#camera-status").text("YES");
+                $("#camera-capture").attr("disabled", false);
+                console.log("camera is available");
+            } else {
+                console.log("camera is NOT available");
+            }
         }});
 }
 
 $(document).ready(function() {
-    $("#camera-capture").attr("disabled", false);
     refreshStatus();
     $("#camera-refresh").click(refreshStatus);
     $("#camera-capture").click(function() {
@@ -69,7 +68,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: php_exec,
-            async: false,
+            async: true,
             data: {camera: "capture",
                    resolution: opt_resolution,
                    quality: opt_quality,
@@ -77,10 +76,12 @@ $(document).ready(function() {
                    flip: opt_flip,
                    delay: opt_delay},
             success: function(ret) {
-                if (ret != 1) {
-
+                if (ret == 0) {
+                    console.log("capture successfully");
+                    // safari will reload img after src is changed, chrome will NOT.
+                    $("#camera-image").attr("src", "image.jpg");
                 } else {
-
+                    console.log("capture failed");
                 }
             }});
     });
