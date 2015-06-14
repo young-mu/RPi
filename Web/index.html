@@ -29,6 +29,7 @@
           <li><a href="#backup">Backup</a></li>
           <li><a href="#sensors">Sensors</a></li>
           <li><a href="#controllers">Controllers</a></li>
+          <li><a href="#camera">Camera</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul> <!-- .nav navbar-nav -->
@@ -180,6 +181,53 @@
           <span id="uln2003-speed">1</span>
       <ul>
     </div>
+
+    <div class="camera" id="camera">
+      <h1>Camera</h1>
+      <ul>
+        <li>RaspberryPi CSI Camera</li>
+          是否可用: <span id="camera-status">NO</span>
+          <button id="camera-refresh">刷新</button>
+          <br/>
+          像素:
+          <select id="camera-resolution">
+            <option value="-w 2400 -h 1800">超高 (2400x1600)</option>
+            <option value="-w 1600 -h 1200">高 (1600x1200)</option>
+            <option value="-w 1024 -h 768" selected="selected">标准 (1024x768)</option>
+            <option value="-w 640 -h 480">低 (640x480)</option>
+            <option value="-w 320 -h 240">超低 (320x240)</option>
+          </select>
+          质量:
+          <select id="camera-quality">
+            <option value="-q 100">高 (100)</option>
+            <option value="-q 85" selected="selected">标准 (85)</option>
+            <option value="-q 50">低 (50)</option>
+          </select>
+          编码:
+          <select id="camera-encode">
+            <option value="-e jpg" selected="selected">JPEG</option>
+            <option value="-e bmp">BMP</option>
+            <option value="-e png">PNG</option>
+          </select>
+          翻转:
+          <select id="camera-flip">
+            <option value="" selected="selected">NO</option>
+            <option value="-hf">水平</option>
+            <option value="-vf">垂直</option>
+          </select>
+          延时:
+          <select id="camera-delay">
+            <option value="-t 1000">1s</option>
+            <option value="-t 3000">3s</option>
+            <option value="-t 5000" selected="selected">5s</option>
+          </select>
+          <button id="camera-capture" disabled="disabled">拍照</button>
+          <span id="camera-countdown">5</span>
+          <button id="camera-download" disabled="disabled">下载</button>
+          <br/>
+          <img id="camera-image" src="" alt="not captured yet" width="200" height="100"></img>
+      <ul>
+    </div>
   </div>
 
   <!-- after document ready -->
@@ -187,6 +235,7 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/sensors.js"></script>
   <script src="js/controllers.js"></script>
+  <script src="js/camera.js"></script>
 </body>
 
 </html>

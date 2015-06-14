@@ -1,13 +1,14 @@
 #!/bin/bash
 
-PREFIX="/srv/http"
+#PREFIX="/srv/http"
+PREFIX="/Library/WebServer/Documents"
 
 function retChk()
 {
     if [ $? = 0 ]; then
-        echo -e "[\e[0;32m OK \e[0m]"
+        echo -e "[\033[0;32m OK \033[0m]"
     else
-        echo -e "[\e[0;31m FAIL \e[0m]"
+        echo -e "[\033[0;31m FAIL \033[0m]"
     fi
 }
 

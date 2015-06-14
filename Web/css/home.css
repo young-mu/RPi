@@ -29,3 +29,33 @@ body {
   margin-bottom: 10px;
   margin-right: 10px;
 }
+
+.camera h1 {
+  text-align: center;
+}
+
+.camera button,
+.camera #camera-status,
+.camera #camera-refresh,
+.camera #camera-capture,
+.camera #camera-countdown,
+.camera #camera_download {
+  width: 80px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.camera #camera-status {
+  font-weight: bold;
+}
+
+.camera #camera-resolution,
+.camera #camera-quality,
+.camera #camera-encode,
+.camera #camera-flip,
+.camera #camera-delay {
+  width: 120px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
