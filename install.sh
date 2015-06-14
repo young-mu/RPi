@@ -1,7 +1,8 @@
 #!/bin/bash
 
-#PREFIX="/srv/http"
-PREFIX="/Library/WebServer/Documents"
+PREFIX="/srv/http" # on RPi for run
+#PREFIX="/Library/WebServer/Documents" # on Mac for development
+#PREFIX="/run/www/html" # on Ubuntu for development
 
 function retChk()
 {
