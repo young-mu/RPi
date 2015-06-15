@@ -28,6 +28,7 @@ function apply()
 {
     if [ $# -eq 0 ]; then
         echo "------------- [applyall] -------------"
+        rm -rf ${PREFIX}/*
         echo -e -n "1. Web/index/html\t\t"
         cp Web/index.html ${PREFIX}/index.html
         retChk
