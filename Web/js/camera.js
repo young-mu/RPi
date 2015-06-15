@@ -1,9 +1,9 @@
 var php_exec = "/php/camera.php";
 var reret;
-var opt_resolution, width, height;
+var opt_resolution;
 var opt_quality;
 var opt_flip;
-var opt_encode;
+var opt_encode, encode;
 var opt_delay, delay;
 var cd_worker;
 
@@ -29,27 +29,24 @@ $(document).ready(function() {
     $("#camera-refresh").click(refreshStatus);
     $("#camera-capture").click(function() {
         opt_resolution = $("#camera-resolution").val();
-        reret = opt_resolution.match(/^-w\ (\d{3,4})\ -h\ (\d{3,4})$/);
-        width = reret[1];
-        height = reret[2];
         opt_quality = $("#camera-quality").val();
         opt_flip = $("#camera-flip").val();
         opt_encode = $("#camera-encode").val();
+        reret = opt_encode.match(/^-e\ ([a-z]{3})$/);
+        encode = reret[1];
         opt_delay = $("#camera-delay").val();
         reret = opt_delay.match(/^-t\ (\d{4,5})$/);
         delay = reret[1] / 1000;
 
         console.log("opt_resolution: " + opt_resolution);
-        console.log("width: " + width + ", height: " + height);
         console.log("opt_quality: " + opt_quality);
         console.log("opt_flip: " + opt_flip);
         console.log("opt_encode: " + opt_encode);
+        console.log("encode: " + encode);
         console.log("opt_delay: " + opt_delay);
         console.log("delay: " + delay);
 
         $("#camera-countdown").text(delay);
-        $("#camera-image").attr("width", width);
-        $("#camera-image").attr("height", height);
 
         cd_worker = new Worker("js/camera-countdown.js");
         console.log("start camera-countdown worker");
@@ -79,7 +76,7 @@ $(document).ready(function() {
                 if (ret == 0) {
                     console.log("capture successfully");
                     // safari will reload img after src is changed, chrome will NOT.
-                    $("#camera-image").attr("src", "image.jpg");
+                    $("#camera-image").attr("src", "image."+encode);
                 } else {
                     console.log("capture failed");
                 }

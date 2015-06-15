@@ -186,9 +186,6 @@
       <h1>Camera</h1>
       <ul>
         <li>RaspberryPi CSI Camera</li>
-          是否可用: <span id="camera-status">NO</span>
-          <button id="camera-refresh">刷新</button>
-          <br/>
           像素:
           <select id="camera-resolution">
             <option value="-w 2400 -h 1800">超高 (2400x1600)</option>
@@ -218,15 +215,16 @@
           延时:
           <select id="camera-delay">
             <option value="-t 1000">1s</option>
-            <option value="-t 3000">3s</option>
-            <option value="-t 5000" selected="selected">5s</option>
+            <option value="-t 3000" selected="selected">3s</option>
+            <option value="-t 5000">5s</option>
           </select>
           <br/>
+          是否可用: <span id="camera-status">NO</span>
+          <button id="camera-refresh">刷新</button>
           <button id="camera-capture" disabled="disabled">拍照</button>
-          <span id="camera-countdown">5</span>
-          <button id="camera-download" disabled="disabled">下载</button>
+          <span id="camera-countdown">3</span>
           <br/>
-          <img id="camera-image" src="" alt="not captured yet" width="200" height="100"></img>
+          <img id="camera-image" src="" alt="not captured yet" width="320" height="240"></img>
       <ul>
     </div>
   </div>

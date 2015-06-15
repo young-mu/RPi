@@ -34,21 +34,6 @@ body {
   text-align: center;
 }
 
-.camera button,
-.camera #camera-status,
-.camera #camera-refresh,
-.camera #camera-capture,
-.camera #camera-countdown,
-.camera #camera_download {
-  width: 80px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-}
-
-.camera #camera-status {
-  font-weight: bold;
-}
-
 .camera #camera-resolution,
 .camera #camera-quality,
 .camera #camera-encode,
@@ -59,3 +44,16 @@ body {
   margin-right: 10px;
 }
 
+.camera button,
+.camera #camera-status,
+.camera #camera-refresh,
+.camera #camera-capture,
+.camera #camera-countdown {
+  width: 80px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.camera #camera-status {
+  font-weight: bold;
+}

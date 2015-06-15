@@ -4,4 +4,5 @@
 
 PREFIX=/srv/http
 
-/opt/vc/bin/raspistill $@ -o ${PREFIX}/image.jpg
+FILETYPE=${8}
+/opt/vc/bin/raspistill $@ -o ${PREFIX}/image.${FILETYPE}
