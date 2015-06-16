@@ -28,6 +28,7 @@ $(document).ready(function() {
     refreshStatus();
     $("#camera-refresh").click(refreshStatus);
     $("#camera-capture").click(function() {
+        $("#camera-image").attr("src", "");
         opt_resolution = $("#camera-resolution").val();
         opt_quality = $("#camera-quality").val();
         opt_flip = $("#camera-flip").val();
@@ -75,7 +76,6 @@ $(document).ready(function() {
             success: function(ret) {
                 if (ret == 0) {
                     console.log("capture successfully");
-                    // safari will reload img after src is changed, chrome will NOT.
                     $("#camera-image").attr("src", "image."+encode);
                 } else {
                     console.log("capture failed");
