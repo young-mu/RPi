@@ -7,3 +7,4 @@ Camera/opencv/capture
 Camera/opencv/output.jpg
 Camera/v4l2/capture
 Camera/v4l2/output.ppm
+Camera/Images/
