@@ -132,13 +132,13 @@ elif [[ $# -eq 1 ]] && [[ $1 = "diffall" ]]; then
 elif [[ $# -eq 1 ]] && [[ $1 = "applyall" ]]; then
     apply
 elif [[ $# -eq 2 ]] && [[ $1 = "diff" ]]; then
-    if [[ $2 -ge 1 ]] && [[ $2 -le 9 ]]; then
+    if [[ $2 -ge 1 ]] && [[ $2 -le 10 ]]; then
         prDiff $2
     else
         prUsage
     fi
 elif [[ $# -eq 2 ]] && [[ $1 = "apply" ]]; then
-    if [[ $2 -ge 1 ]] && [[ $2 -le 9 ]]; then
+    if [[ $2 -ge 1 ]] && [[ $2 -le 10 ]]; then
         apply $2
     else
         prUsage
