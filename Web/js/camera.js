@@ -9,7 +9,7 @@ var cd_worker;
 
 function refreshStatus() {
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: php_exec,
         async: false,
         data: {camera:"status"},
@@ -38,6 +38,7 @@ $(document).ready(function() {
         opt_delay = $("#camera-delay").val();
         reret = opt_delay.match(/^-t\ (\d{4,5})$/);
         delay = reret[1] / 1000;
+        opt_name = "-o /srv/http/image." + encode;
 
         console.log("opt_resolution: " + opt_resolution);
         console.log("opt_quality: " + opt_quality);
@@ -64,7 +65,7 @@ $(document).ready(function() {
         $("#camera-capture").attr("disabled", true);
 
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: php_exec,
             async: true,
             data: {camera: "capture",
@@ -72,7 +73,8 @@ $(document).ready(function() {
                    quality: opt_quality,
                    encode: opt_encode,
                    flip: opt_flip,
-                   delay: opt_delay},
+                   delay: opt_delay,
+                   name: opt_name},
             success: function(ret) {
                 if (ret == 0) {
                     console.log("capture successfully");
